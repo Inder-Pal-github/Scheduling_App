@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { time } from "../utils/resource";
 
 const Dashboard = () => {
-  const [selectedTimezone, setSelectedTimezone] = useState({});
+  const [selectedTimezone, setSelectedTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("_id");
@@ -50,18 +50,17 @@ const Dashboard = () => {
       });
     }
   };
-  console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
   return (
     <div>
-      <nav className="dashboard_nav">
+      <nav className="dashboard__nav">
         <h2>BookMe</h2>
         <button className="logout_btn" onClick={handleLogout}>
           Log out
         </button>
       </nav>
-      <main className="dashboard_main">
-        <h2 className="dashboard_heading">Select your availability</h2>
-        <div className="timezone_wrapper">
+      <main className="dashboard__main">
+        <h2 className="dashboard__heading">Select your availability</h2>
+        <div className="timezone__wrapper">
           <p>Pick your timezone</p>
           <TimezoneSelect
             value={selectedTimezone}
@@ -70,7 +69,7 @@ const Dashboard = () => {
           {schedule.map((sch, id) => (
             <div className="form" key={id}>
               <p>{sch.day}</p>
-              <div className="select_wrapper">
+              <div className="select__wrapper">
                 <label htmlFor="startTime">Start Time</label>
                 <select
                   name="startTime"
@@ -84,7 +83,7 @@ const Dashboard = () => {
                   ))}
                 </select>
               </div>
-              <div className="select_wrapper">
+              <div className="select__wrapper">
                 <label htmlFor="endTime">End Time</label>
                 <select
                   name="endTime"
@@ -101,7 +100,7 @@ const Dashboard = () => {
             </div>
           ))}
         </div>
-        <div className="saveBtn_container">
+        <div className="saveBtn__container">
           <button onClick={handleSaveSchedules}>SAVE SCHEDULES</button>
           <ToastContainer />
         </div>
